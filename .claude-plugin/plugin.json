@@ -1,0 +1,7 @@
+{
+  "name": "email-manager-public",
+  "version": "0.1.0",
+  "description": "Automated multi-account email triage: classify, file, notify on urgent items, and produce daily digests. Folder-based knowledge store + three scheduled tasks.",
+  "author": { "name": "GUA" },
+  "keywords": ["email", "gmail", "triage", "automation", "digest"]
+}
