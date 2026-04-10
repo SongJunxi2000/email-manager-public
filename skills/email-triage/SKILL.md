@@ -35,7 +35,7 @@ Treat this folder as the source of truth. Never delete files from `archive/`, `p
 
 1. Read `RULES.md` fresh on every run. Never cache it across runs.
 2. Determine the original recipient by checking `Delivered-To`, `To`, `Cc`, `X-Forwarded-To` in that order.
-3. Apply blocklist first (auto-file), then VIP allowlist (escalate), then signal-based rules in `RULES.md`.
+3. Apply rules in this order: **active senders** (always-notify; wins over everything including quiet hours and the verification-code downgrade) → blocklist (auto-file) → verification-code downgrade (codes go to `transactional`, no notification) → VIP allowlist (escalate) → signal-based rules in `RULES.md`.
 4. Choose exactly one category. When in doubt between two action categories, pick the more urgent one.
 5. Honor quiet hours: during the configured window, only `urgent_action` with a hard deadline ≤24h may notify.
 
