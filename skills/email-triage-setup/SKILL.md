@@ -23,9 +23,11 @@ Walk the user through installing the email-triage system. Do this once per user.
    - Local timezone (for quiet hours)?
    - Quiet hours window (default: 22:00–07:00)?
    - VIP senders or domains (optional)?
+   - **Active senders** — people/domains that should ALWAYS notify immediately, even during quiet hours (optional)?
+   - Suppress verification-code notifications? (default: yes — codes are filed to `transactional` since users typically request them and check the inbox right away)
    - Notification channel: Lark webhook URL, Slack webhook URL, or "Gmail draft to self"?
 
-3. **Patch `RULES.md`.** Replace the `<account-N@example.com>` placeholders, the `<22:00>`/`<07:00>` placeholders, the VIP allowlist section, and the notification-channel section. Leave the categories, signal rules, and blocklist defaults alone unless the user asks.
+3. **Patch `RULES.md`.** Replace the `<account-N@example.com>` placeholders, the `<22:00>`/`<07:00>` placeholders, the VIP allowlist section, the active-senders section, and the notification-channel section. Leave the categories, signal rules, and blocklist defaults alone unless the user asks.
 
 4. **Create the three scheduled tasks** via `mcp__scheduled-tasks__create_scheduled_task`. Each task description must reference the user's folder path:
    - `email-sweep-15min` — cron `*/15 * * * *`
