@@ -9,6 +9,15 @@ List the email accounts this system monitors. If you forward several into one in
 - `<account-2@example.com>` — <label, e.g. personal>
 - `<account-3@example.com>` — <label>
 
+## Active senders (always notify — highest priority)
+
+Evaluated **before** category classification. If the sender matches, the email is tagged `urgent_action` and pushed to the notification channel immediately, bypassing quiet hours and any downgrade rules below. Use this for people/teams you always want to hear from. One per line, lowercase email or `@domain`.
+
+```
+# @partner-company.com
+# important.person@example.com
+```
+
 ## Categories
 
 | Category | Notify? | Behavior |
@@ -29,7 +38,9 @@ List the email accounts this system monitors. If you forward several into one in
 - From a VIP (see allowlist) AND contains a question or deadline
 - Bank/financial alert about a transaction, fraud, or balance issue
 - Calendar invite for a meeting < 24h away
-- Verification code that's still valid (2FA, password reset)
+- ~~Verification code that's still valid (2FA, password reset)~~ — see downgrade rule below
+
+**Verification codes → `transactional` (no notification).** Most users request codes manually and check the inbox immediately, so notifications are noise. Detect by: subject/body contains `verification code`, `verify your`, `one-time`, `OTP`, `security code`, `confirm your email`, or an N-digit code pattern; or sender matches `noreply@`/`no-reply@`/`verify@`/`security@`. File in `archive/`. Exception: if the sender is on the active-senders list, the active-sender rule wins and it still notifies. Remove this rule if you want code notifications.
 
 **needs_action**: Anything that requires you to do something but isn't time-critical — vendor asking for info, form to fill, document to sign, scheduling back-and-forth, tax/payroll items.
 
